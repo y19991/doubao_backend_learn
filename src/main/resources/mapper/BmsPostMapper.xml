@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yafnds.doubao.mapper.BmsPostMapper">
+    <!-- id和底下的语句标签关联，type和要实体类关联 -->
+    <!-- column：字段名 property：实体类变量-->
+    <resultMap id="topicVO" type="com.yafnds.doubao.model.vo.PostVO">
+        <id column="id" property="id" />
+        <result column="title" property="title"/>
+        <result column="user_id" property="userId"/>
+        <result column="comments" property="comments"/>
+        <result column="view" property="view"/>
+        <result column="collects" property="collects"/>
+        <result column="top" property="top"/>
+        <result column="essence" property="essence"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="username" property="username"/>
+        <result column="alias" property="alias"/>
+        <result column="avatar" property="avatar"/>
+    </resultMap>
+
+    <!--
+         查询话题及发布该话题的用户
+         ————————————————————————
+         该动态sql的判断：
+            当查询目标为当前最火的话题时：
+                where：当前时间-7天 <= 话题创建时间 <= 当前时间+1天
+                order：浏览量倒序，创建时间倒序
+            查询目标不是当前最火的话题：
+                order：创建时间倒序
+    -->
+    <select id="selectListAndPage" resultMap="topicVO">
+        SELECT A.id, A.title, A.user_id, A.comments, A.`view`
+            , A.collects, A.top, A.essence, A.create_time, A.modify_time
+            , B.username, B.alias, B.avatar
+        FROM bms_post A
+        LEFT JOIN ums_user B ON A.user_id = B.id
+        <where>
+            <if test="tab == 'hot'">
+                DATE(A.create_time) &lt;= DATE_ADD('2020-12-05', INTERVAL 1 DAY)
+                AND DATE(A.create_time) &gt;= DATE_SUB('2020-11-30', INTERVAL 7 DAY)
+            </if>
+        </where>
+        <if test="tab != 'hot'">
+            ORDER BY A.create_time DESC
+        </if>
+        <if test="tab == 'hot'">
+            ORDER BY A.`VIEW` DESC, A.create_time DESC
+        </if>
+    </select>
+</mapper>

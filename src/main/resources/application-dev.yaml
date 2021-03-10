@@ -1,0 +1,21 @@
+# 服务器端口
+server:
+  port: 8000
+
+web:
+  domain: http://localhost
+
+# 数据库连接池
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/doubao?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=GMT%2B8
+    type: com.zaxxer.hikari.HikariDataSource
+
+# 日志监听等级
+logging:
+  level:
+    root: info
+    com.yafnds.doubao: debug
