@@ -1,6 +1,7 @@
 package com.yafnds.doubao.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yafnds.doubao.model.entity.BmsTag;
 import com.yafnds.doubao.model.entity.BmsTopicTag;
 
 import java.util.List;
@@ -20,4 +21,11 @@ public interface IBmsTopicTagService extends IService<BmsTopicTag> {
      * @return 传入的 topicId 对应的记录列表
      */
     List<BmsTopicTag> selectByTopicId(String topicId);
+
+    /**
+     * 创建中间关系
+     * @param id
+     * @param tags
+     */
+    void createTopicTag(String id, List<BmsTag> tags);
 }

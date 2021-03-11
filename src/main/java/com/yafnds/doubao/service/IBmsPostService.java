@@ -2,7 +2,9 @@ package com.yafnds.doubao.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yafnds.doubao.model.dto.CreateTopicDTO;
 import com.yafnds.doubao.model.entity.BmsPost;
+import com.yafnds.doubao.model.entity.UmsUser;
 import com.yafnds.doubao.model.vo.PostVO;
 
 /**
@@ -16,9 +18,11 @@ public interface IBmsPostService extends IService<BmsPost> {
 
     /**
      * 获取首页话题列表
-     * @param page
-     * @param tab
-     * @return
      */
     Page<PostVO> getList(Page<PostVO> page, String tab);
+
+    /**
+     * 新增话题
+     */
+    BmsPost create(CreateTopicDTO dto, UmsUser user);
 }
