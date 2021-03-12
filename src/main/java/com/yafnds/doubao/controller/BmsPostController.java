@@ -64,11 +64,13 @@ public class BmsPostController extends BaseController {
     }
 
     /**
-     *
-     * @return
+     * 获取话题详情
+     * @param topicId
+     * @return Map 包含 话题对象、用户(作者)对象、话题对应的标签对象
      */
-    public ApiResult<Map<String, Object>> view() {
-
-        return ApiResult.success();
+    @GetMapping
+    public ApiResult<Map<String, Object>> view(@RequestParam("id") String topicId) {
+        Map<String, Object> viewTopic = bmsPostService.viewTopic(topicId);
+        return ApiResult.success(viewTopic);
     }
 }

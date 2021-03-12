@@ -7,6 +7,8 @@ import com.yafnds.doubao.model.entity.BmsPost;
 import com.yafnds.doubao.model.entity.UmsUser;
 import com.yafnds.doubao.model.vo.PostVO;
 
+import java.util.Map;
+
 /**
  * @program: doubao
  * @description: 话题
@@ -25,4 +27,9 @@ public interface IBmsPostService extends IService<BmsPost> {
      * 新增话题
      */
     BmsPost create(CreateTopicDTO dto, UmsUser user);
+
+    /**
+     * 查看话题详情
+     */
+    Map<String, Object> viewTopic(String topicId);
 }

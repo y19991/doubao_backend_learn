@@ -9,11 +9,14 @@ import com.yafnds.doubao.mapper.UmsUserMapper;
 import com.yafnds.doubao.model.dto.LoginDTO;
 import com.yafnds.doubao.model.dto.RegisterDTO;
 import com.yafnds.doubao.model.entity.UmsUser;
+import com.yafnds.doubao.model.vo.ProfileVO;
 import com.yafnds.doubao.service.IUmsUserService;
 import com.yafnds.doubao.utils.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Date;
 
@@ -108,7 +111,35 @@ public class IUmsUserServiceImpl extends ServiceImpl<UmsUserMapper, UmsUser>
         }
 
         return token;
-
     }
 
+    /**
+     * 获取用户信息
+     * @param id 用户id
+     * @return 转悠用户信息的 ProfileVO对象
+     */
+    @Override
+    public ProfileVO getUserProfile(String id) {
+
+        ProfileVO profile = new ProfileVO();
+
+        try {
+
+            UmsUser user = baseMapper.selectById(id);
+
+            /*
+            Beanutils.copyProperties(obj1,obj2):
+                把 obj1 里变量值赋给 obj2 里对应的字段
+                对应关系：变量属性名称一致
+            */
+            BeanUtils.copyProperties(user, profile);
+
+            return profile;
+
+        } catch (Exception e) {
+            log.info("用户不存在");
+        }
+
+        return profile;
+    }
 }

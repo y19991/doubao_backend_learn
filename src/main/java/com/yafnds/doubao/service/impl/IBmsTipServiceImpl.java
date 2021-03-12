@@ -25,7 +25,6 @@ public class IBmsTipServiceImpl extends ServiceImpl<BmsTipMapper, BmsTip>
         try {
             todayTip = this.baseMapper.getRandomTip();
         } catch (Exception e) {
-            System.out.println(e);
             log.info("tip转化失败");
         }
 

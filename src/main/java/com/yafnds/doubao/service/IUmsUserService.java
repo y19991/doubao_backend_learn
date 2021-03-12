@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.yafnds.doubao.model.dto.LoginDTO;
 import com.yafnds.doubao.model.dto.RegisterDTO;
 import com.yafnds.doubao.model.entity.UmsUser;
+import com.yafnds.doubao.model.vo.ProfileVO;
 
 /**
  * @program: doubao
@@ -34,4 +35,11 @@ public interface IUmsUserService extends IService<UmsUser> {
      * @return
      */
     UmsUser getUserByUsername(String name);
+
+    /**
+     * 获取用户信息
+     * @param id 用户id
+     * @return
+     */
+    ProfileVO getUserProfile(String id);
 }

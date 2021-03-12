@@ -83,7 +83,6 @@ public class JwtUtil {
                         .setSigningKey(token)
                         .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                         .getBody();
-                System.out.println(body);
                 return new CustomHttpServletRequest(request,body);
             } catch (Exception e) {
                 logger.info(e.getMessage());

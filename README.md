@@ -1,5 +1,5 @@
 # 豆宝社区
-###原地址：
+### 原地址：
 源码：
 [前端](https://github.com/songboriceman/doubao_community_frontend)
 [后端](https://github.com/songboriceman/doubao_community_backend)
