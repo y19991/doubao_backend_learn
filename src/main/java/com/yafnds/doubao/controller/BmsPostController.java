@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+import java.util.Map;
+
 import static com.yafnds.doubao.jwt.JwtUtil.USER_NAME;
 
 /**
@@ -59,5 +61,14 @@ public class BmsPostController extends BaseController {
         UmsUser user = umsUserService.getUserByUsername(username);
         BmsPost topic = bmsPostService.create(dto, user);
         return ApiResult.success(topic);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ApiResult<Map<String, Object>> view() {
+
+        return ApiResult.success();
     }
 }

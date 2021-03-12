@@ -17,8 +17,6 @@ import java.util.List;
  **/
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PostVO implements Serializable {
 
     private static final long serialVersionUID = -261082150965211545L;
