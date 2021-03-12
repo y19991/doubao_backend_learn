@@ -5,15 +5,20 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yafnds.doubao.common.exception.ApiAsserts;
 import com.yafnds.doubao.jwt.JwtUtil;
+import com.yafnds.doubao.mapper.BmsFollowMapper;
+import com.yafnds.doubao.mapper.BmsPostMapper;
 import com.yafnds.doubao.mapper.UmsUserMapper;
 import com.yafnds.doubao.model.dto.LoginDTO;
 import com.yafnds.doubao.model.dto.RegisterDTO;
+import com.yafnds.doubao.model.entity.BmsFollow;
+import com.yafnds.doubao.model.entity.BmsPost;
 import com.yafnds.doubao.model.entity.UmsUser;
 import com.yafnds.doubao.model.vo.ProfileVO;
 import com.yafnds.doubao.service.IUmsUserService;
 import com.yafnds.doubao.utils.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -32,6 +37,11 @@ import java.util.Date;
 @Transactional(rollbackFor = Exception.class)
 public class IUmsUserServiceImpl extends ServiceImpl<UmsUserMapper, UmsUser>
         implements IUmsUserService {
+
+    @Autowired
+    private BmsPostMapper bmsPostMapper;
+    @Autowired
+    private BmsFollowMapper bmsFollowMapper;
 
     /**
      * 执行注册
@@ -133,6 +143,14 @@ public class IUmsUserServiceImpl extends ServiceImpl<UmsUserMapper, UmsUser>
                 对应关系：变量属性名称一致
             */
             BeanUtils.copyProperties(user, profile);
+
+            // 用户文章数
+            Integer userTopicCount = bmsPostMapper.selectCount(new LambdaQueryWrapper<BmsPost>().eq(BmsPost::getUserId, id));
+            profile.setTopicCount(userTopicCount);
+
+            // 粉丝数
+            Integer userFollowCount = bmsFollowMapper.selectCount(new LambdaQueryWrapper<BmsFollow>().eq(BmsFollow::getFollowerId, id));
+            profile.setFollowerCount(userFollowCount);
 
             return profile;
 

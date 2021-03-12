@@ -38,7 +38,7 @@ public class ProfileVO {
     private Integer followCount;
 
     /**
-     * 关注者数
+     * 粉丝数
      */
     private Integer followerCount;
 
