@@ -7,6 +7,8 @@ import com.yafnds.doubao.model.vo.PostVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @program: doubao
  * @description: 话题
@@ -24,4 +26,10 @@ public interface BmsPostMapper extends BaseMapper<BmsPost> {
      * @return
      */
     Page<PostVO> selectListAndPage(@Param("page") Page<PostVO> page, @Param("tab") String tab);
+
+    /**
+     * 查出十条随机的帖子，不包括当前帖子
+     * @param id 当前帖子id
+     */
+    List<BmsPost> selectRandomTenDifferentFromNow(@Param("id") String id);
 }

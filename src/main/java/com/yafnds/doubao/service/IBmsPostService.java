@@ -6,7 +6,9 @@ import com.yafnds.doubao.model.dto.CreateTopicDTO;
 import com.yafnds.doubao.model.entity.BmsPost;
 import com.yafnds.doubao.model.entity.UmsUser;
 import com.yafnds.doubao.model.vo.PostVO;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,4 +34,10 @@ public interface IBmsPostService extends IService<BmsPost> {
      * 查看话题详情
      */
     Map<String, Object> viewTopic(String topicId);
+
+    /**
+     * 获取详情页推荐
+     * @param id 当前帖子的id
+     */
+    List<BmsPost> selectRecommend(@Param("id") String id);
 }

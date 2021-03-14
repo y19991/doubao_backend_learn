@@ -47,9 +47,7 @@ public class ApiResult<T> implements Serializable {
 
     /**
      * 成功
-     *
-     * @param data 结果集
-     * @return {code:200,message:操作成功,data:自定义}
+     * @return {code:200,message:操作成功,data:null}
      */
     public static <T> ApiResult<T> success() {
         return new ApiResult<T>(ApiErrorCode.SUCCESS.getCode(), ApiErrorCode.SUCCESS.getMessage(), null);

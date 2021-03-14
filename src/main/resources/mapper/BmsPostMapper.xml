@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yafnds.doubao.mapper.BmsPostMapper">
+
     <!-- id和底下的语句标签关联，type和要实体类关联 -->
     <!-- column：字段名 property：实体类变量-->
     <resultMap id="topicVO" type="com.yafnds.doubao.model.vo.PostVO">
@@ -48,4 +49,13 @@
             ORDER BY A.`VIEW` DESC, A.create_time DESC
         </if>
     </select>
+
+    <select id="selectRandomTenDifferentFromNow" resultType="com.yafnds.doubao.model.entity.BmsPost">
+        select *
+        from bms_post
+        where id != #{id}
+        order by rand(), `view`
+        limit 10
+    </select>
+
 </mapper>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.yafnds.doubao.jwt.JwtUtil.USER_NAME;
@@ -72,5 +73,16 @@ public class BmsPostController extends BaseController {
     public ApiResult<Map<String, Object>> view(@RequestParam("id") String topicId) {
         Map<String, Object> viewTopic = bmsPostService.viewTopic(topicId);
         return ApiResult.success(viewTopic);
+    }
+
+    /**
+     * 随便看看
+     * @param id 当前话题id
+     * @return
+     */
+    @GetMapping("/recommend")
+    public ApiResult<List<BmsPost>> recommendTopics(@RequestParam("topicId") String id) {
+        List<BmsPost> recommend = bmsPostService.selectRecommend(id);
+        return ApiResult.success(recommend);
     }
 }

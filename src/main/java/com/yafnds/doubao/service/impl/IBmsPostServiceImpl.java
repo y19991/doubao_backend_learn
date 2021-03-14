@@ -182,4 +182,14 @@ public class IBmsPostServiceImpl extends ServiceImpl<BmsPostMapper, BmsPost> imp
 
         return map;
     }
+
+    /**
+     * 获取详情页推荐
+     * @param id 当前帖子的id
+     * @return 帖子列表 长度：10
+     */
+    @Override
+    public List<BmsPost> selectRecommend(String id) {
+        return this.baseMapper.selectRandomTenDifferentFromNow(id);
+    }
 }

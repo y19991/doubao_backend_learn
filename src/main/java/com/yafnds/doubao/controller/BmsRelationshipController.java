@@ -7,7 +7,6 @@ import com.yafnds.doubao.model.entity.BmsFollow;
 import com.yafnds.doubao.model.entity.UmsUser;
 import com.yafnds.doubao.service.IBmsFollowService;
 import com.yafnds.doubao.service.IUmsUserService;
-import org.apache.ibatis.annotations.One;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
