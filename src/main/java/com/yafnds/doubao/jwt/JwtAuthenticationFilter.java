@@ -68,9 +68,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         protectedPaths.add("/comment/add_comment");
 
         // 关注用户
-        protectedPaths.add("/relationship/subscribe");
+        protectedPaths.add("/relationship/subscribe/*");
         // 取消关注
-        protectedPaths.add("/relationship/unsubscribe");
+        protectedPaths.add("/relationship/unsubscribe/*");
+        // 判断是否关注该作者
         protectedPaths.add("/relationship/validate/*");
 
         /*
