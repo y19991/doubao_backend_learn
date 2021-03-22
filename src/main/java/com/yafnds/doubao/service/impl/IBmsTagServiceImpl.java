@@ -40,7 +40,7 @@ public class IBmsTagServiceImpl extends ServiceImpl<BmsTagMapper, BmsTag> implem
         for (String tagName : tagNames) {
             // 2. 去库里查是否有相同的标签
             BmsTag newTag = this.baseMapper.selectOne(new LambdaQueryWrapper<BmsTag>().eq(BmsTag::getName, tagName));
-            if (!ObjectUtils.isEmpty(newTag)) {
+            if (ObjectUtils.isEmpty(newTag)) {
                 // 新增标签
                 newTag = BmsTag.builder().name(tagName).build();
                 this.baseMapper.insert(newTag);

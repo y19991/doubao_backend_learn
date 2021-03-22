@@ -67,22 +67,23 @@ public class JwtUtil {
      * @return 含有解析后数据的定制请求
      */
     public static HttpServletRequest validateTokenAndAddUserIdToHeader(HttpServletRequest request) {
-        // 返回含有常量 HEADER_STRING 值的请求头，如果找不到，则返回 null
+        // 从请求中获取名为 HEADER_STRING 的请求头，如果找不到，则返回 null
         String token = request.getHeader(HEADER_STRING);
 
         if (token != null) {
 
             /*
                 解析令牌
-                    setSigningKey(): 判断传入的key是否是JWS数字签名的令牌
+                    setSigningKey(): 设置解析令牌的key
                     parseClaimsJws(): 解析令牌（JWS字符串）
                     getBody(): 返回解析后数据
              */
             try {
                 Map<String, Object> body = Jwts.parser()
-                        .setSigningKey(token)
+                        .setSigningKey(SECRET)
                         .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                         .getBody();
+                // 返回定制的请求
                 return new CustomHttpServletRequest(request,body);
             } catch (Exception e) {
                 logger.info(e.getMessage());
