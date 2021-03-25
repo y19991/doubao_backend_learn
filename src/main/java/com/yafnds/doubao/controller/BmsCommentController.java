@@ -23,7 +23,7 @@ import static com.yafnds.doubao.jwt.JwtUtil.USER_NAME;
  * @Description:
  */
 
-@Controller
+@RestController
 @RequestMapping("/comment")
 public class BmsCommentController extends BaseController{
 

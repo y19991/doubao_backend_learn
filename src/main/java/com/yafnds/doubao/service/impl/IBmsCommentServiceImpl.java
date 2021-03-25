@@ -1,7 +1,6 @@
 package com.yafnds.doubao.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yafnds.doubao.common.exception.ApiAsserts;
 import com.yafnds.doubao.mapper.BmsCommentMapper;
 import com.yafnds.doubao.model.dto.CommentDTO;
 import com.yafnds.doubao.model.entity.BmsComment;
@@ -10,7 +9,6 @@ import com.yafnds.doubao.model.vo.CommentVO;
 import com.yafnds.doubao.service.IBmsCommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,17 +38,12 @@ public class IBmsCommentServiceImpl extends ServiceImpl<BmsCommentMapper, BmsCom
         List<CommentVO> comments = new ArrayList<>();
 
         try {
-
             comments = this.baseMapper.getCommentVOByTopicId(topicId);
-            if (ObjectUtils.isEmpty(comments)) {
-                ApiAsserts.fail("评论为空");
-            }
-
         } catch (Exception e) {
             log.info("获取评论失败: "+e);
-        } finally {
-            return comments;
         }
+
+        return comments;
     }
 
     /**

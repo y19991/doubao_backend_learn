@@ -3,6 +3,7 @@ package com.yafnds.doubao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yafnds.doubao.model.entity.BmsComment;
 import com.yafnds.doubao.model.vo.CommentVO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,6 +24,6 @@ public interface BmsCommentMapper extends BaseMapper<BmsComment> {
      * @param topicId 话题id
      * @return {@link CommentVO}
      */
-    List<CommentVO> getCommentVOByTopicId(String topicId);
+    List<CommentVO> getCommentVOByTopicId(@Param("topicId") String topicId);
 
 }

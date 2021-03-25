@@ -1,7 +1,6 @@
 package com.yafnds.doubao;
 
 import com.yafnds.doubao.jwt.JwtAuthenticationFilter;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import javax.servlet.FilterRegistration;
 
 @SpringBootApplication
-@MapperScan("com.yafnds.doubao.mapper")
 public class DoubaoApplication extends SpringBootServletInitializer {
 
     @Override
